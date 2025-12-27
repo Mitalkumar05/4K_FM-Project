@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | 4K_FM</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { padding: 40px; text-align: center; display: none; /* Hidden by default */ }
+        .admin-container {
+            max-width: 500px; margin: 0 auto; background: #181818; padding: 40px;
+            border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h2 { color: #e91429; margin-bottom: 30px; } /* Red for Admin */
+        input, select { width: 90%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #333; color: white; border-radius: 5px; }
+        button { width: 100%; padding: 12px; margin-top: 20px; background-color: #e91429; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; color: white; font-size: 16px; }
+        button:hover { background-color: #ff4d4d; }
+        .back-link { display: block; margin-top: 20px; color: #b3b3b3; text-decoration: none; }
+        .back-link:hover { color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <h2>⚡️ SECRET ADMIN PANEL</h2>
+        
+        <input type="text" id="newTitle" placeholder="Title (e.g. My New Song)">
+        <select id="newCategory">
+            <option value="Podcast">Podcast</option>
+            <option value="Audiobook">Audiobook</option>
+            <option value="Story">Story</option>
+        </select>
+        <input type="text" id="newImage" placeholder="Image URL (Paste a link)">
+        <input type="text" id="newAudio" placeholder="Audio URL (Paste MP3 link)">
+        
+        <button onclick="uploadContent()">🚀 Upload Now</button>
+        <a href="index.html" class="back-link">← Back to Main Website</a>
+    </div>
+
+    <script>
+        // 🔒 SECURITY CHECK 🔒
+        const secret = prompt("🛑 RESTRICTED AREA 🛑\nEnter Admin Password:");
+        
+        // CHANGE THIS PASSWORD TO WHATEVER YOU WANT
+        if (secret === "admin123") {
+            document.body.style.display = "block"; // Show page
+        } else {
+            alert("❌ ACCESS DENIED! Get out!");
+            window.location.href = "index.html"; // Kick them out
+        }
+
+        async function uploadContent() {
+            const title = document.getElementById('newTitle').value;
+            const category = document.getElementById('newCategory').value;
+            const imageUrl = document.getElementById('newImage').value;
+            const audioUrl = document.getElementById('newAudio').value;
+
+            if(!title || !imageUrl || !audioUrl) return alert("Please fill all fields!");
+
+            const res = await fetch('/api/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title, category, imageUrl, audioUrl })
+            });
+
+            const data = await res.json();
+            if(data.success) {
+                alert("✅ Success! " + title + " added to library.");
+                document.getElementById('newTitle').value = "";
+                document.getElementById('newImage').value = "";
+                document.getElementById('newAudio').value = "";
+            } else {
+                alert("Error adding content.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4K_FM Audio Library</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="auth-screen">
+        <div class="auth-container">
+            <h1 class="logo">4K_FM 🎧</h1>
+            
+            <div id="login-form">
+                <h2>Welcome Back</h2>
+                <input type="email" id="loginEmail" placeholder="Email Address">
+                <input type="password" id="loginPass" placeholder="Password">
+                <button onclick="loginUser()">Log In</button>
+                <p class="switch-text">New here? <span onclick="showSignup()">Create Account</span></p>
+                <p class="forgot-text" onclick="showForgot()">Forgot Password?</p>
+            </div>
+
+            <div id="signup-form" style="display: none;">
+                <h2>Create Account</h2>
+                <input type="text" id="signupName" placeholder="Full Name">
+                <input type="email" id="signupEmail" placeholder="Email Address">
+                <input type="password" id="signupPass" placeholder="Password">
+                <button onclick="registerUser()">Sign Up</button>
+                <p class="switch-text">Already have an account? <span onclick="showLogin()">Log In</span></p>
+            </div>
+
+            <div id="forgot-form" style="display: none;">
+                <h2>Reset Password</h2>
+                <div id="reset-input-area">
+                    <input type="email" id="resetEmail" placeholder="Enter your email">
+                    <button id="resetBtn" onclick="sendResetLink()">Send Link</button>
+                </div>
+                <div id="reset-success" style="display: none; text-align: center;">
+                    <i class="fas fa-check-circle" style="font-size: 50px; color: #1DB954; margin-bottom: 15px;"></i>
+                    <h3>Link Sent!</h3>
+                </div>
+                <p class="switch-text"><span onclick="showLogin()">Back to Log In</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-screen" style="display: none;">
+        <header>
+            <div class="logo" onclick="filterData('All')">4K_FM 🎧</div>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchData()">
+            </div>
+
+            <nav>
+                <button id="nav-home" class="filter-btn active" onclick="filterData('All')">Home</button>
+                <button id="nav-profile" class="filter-btn" onclick="showProfile()"><i class="fas fa-user"></i> Profile</button>
+                <button class="logout-btn" onclick="logoutUser()">Sign Out</button>
+            </nav>
+        </header>
+
+        <main>
+            <div id="library-section">
+                <div class="categories">
+                    <button class="cat-btn active" onclick="filterData('All')">All</button>
+                    <button class="cat-btn" onclick="filterData('Podcast')">Podcasts</button>
+                    <button class="cat-btn" onclick="filterData('Audiobook')">Audiobooks</button>
+                    <button class="cat-btn" onclick="filterData('Story')">Stories</button>
+                </div>
+                <h2 id="section-title">All Library</h2>
+                <div class="grid-container" id="content-grid"></div>
+            </div>
+
+            <div id="profile-section" style="display: none;">
+                
+                <div class="profile-layout">
+                    <div class="profile-card">
+                        <img src="https://picsum.photos/seed/user123/200/200" alt="Avatar" class="avatar">
+                        <h2 id="profileName">User Name</h2>
+                        <p id="profileEmail">user@example.com</p>
+                        
+                        <button class="upgrade-btn">✨ Upgrade to Premium</button>
+                        
+                        <div id="admin-area"></div>
+                    </div>
+
+                    <div class="favorites-area">
+                        <h3>Your Favorites ❤️</h3>
+                        <div class="grid-container" id="fav-grid">
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+            
+                <div class="footer-section">
+                    <h2 class="footer-logo">4K_FM 🎧</h2>
+                    <p>Your premium destination for immersive audiobooks, podcasts, and stories. Listen anywhere, anytime.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li onclick="filterData('All')">Home Library</li>
+                        <li onclick="filterData('Podcast')">Podcasts</li>
+                        <li onclick="filterData('Audiobook')">Audiobooks</li>
+                        <li onclick="showProfile()">My Profile</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 4K_FM Audio. Designed with ❤️ by <b>4K_FM Team</b>.</p>
+            </div>
+        </footer>
+
+        <div class="player-container">
+        <div class="player">
+            <div class="player-info">
+                <div class="now-playing-icon">🎵</div>
+                <div id="player-text">Select audio to play...</div>
+            </div>
+            <audio controls></audio>
+        </div>
+    </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
