@@ -6,13 +6,13 @@ const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
 
-// 1. Define the path clearly
+// 1. Define path to frontend
 const frontendPath = path.join(__dirname, 'frontend');
 
-// 2. Try to serve the static files
+// 2. Serve files
 app.use(express.static(frontendPath));
 
-// --- 💾 KEEP YOUR DATA SAFE ---
+// --- 💾 DATA ---
 const libraryData = [
     { "title": "Atomic Habits", "category": "Audiobook", "imageUrl": "https://covers.openlibrary.org/b/id/12833633-L.jpg", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
     { "title": "Sherlock Holmes", "category": "Audiobook", "imageUrl": "https://covers.openlibrary.org/b/id/12556531-L.jpg", "audioUrl": "https://www.archive.org/download/adventures_sherlock_holmes_librivox/adventure_holmes_01_doyle_64kb.mp3" },
@@ -23,14 +23,14 @@ const libraryData = [
 
 app.get('/api/content', (req, res) => res.json(libraryData));
 
-// --- 🕵️‍♂️ THE DEBUG ROUTE ---
-app.get('*', (req, res) => {
+// --- 🟢 FIX: The "Safety Net" (No crashing symbols!) ---
+app.use((req, res) => {
     const indexPath = path.join(frontendPath, 'index.html');
     
     if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
     } else {
-        // If file is missing, LIST what exists so we can fix it!
+        // ⚠️ DEBUG MODE: List files to find the spelling error
         const rootFiles = fs.readdirSync(__dirname);
         let frontendFiles = "Folder Not Found";
         
@@ -39,15 +39,13 @@ app.get('*', (req, res) => {
         }
 
         res.status(404).send(`
-            <style>body{font-family:sans-serif; background:#222; color:#fff; padding:20px;}</style>
             <h1>⚠️ Debug Report</h1>
-            <p>I looked for: <b>${indexPath}</b></p>
-            <p>But I could not find it.</p>
+            <p>Server is running! Now let's find the file.</p>
             <hr>
-            <h3>📂 Files I CAN see in the Root folder:</h3>
+            <h3>📂 ROOT Folder contains:</h3>
             <pre>${rootFiles.join('\n')}</pre>
             <hr>
-            <h3>📂 Files inside 'frontend':</h3>
+            <h3>📂 FRONTEND Folder contains:</h3>
             <pre>${frontendFiles}</pre>
         `);
     }
