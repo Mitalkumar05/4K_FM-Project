@@ -17,7 +17,10 @@ const libraryData = [
     { "title": "Sherlock Holmes", "category": "Audiobook", "imageUrl": "https://covers.openlibrary.org/b/id/12556531-L.jpg", "audioUrl": "https://www.archive.org/download/adventures_sherlock_holmes_librivox/adventure_holmes_01_doyle_64kb.mp3" },
     { "title": "Rich Dad Poor Dad", "category": "Audiobook", "imageUrl": "https://covers.openlibrary.org/b/id/12776856-L.jpg", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" },
     { "title": "TED Talks Daily", "category": "Podcast", "imageUrl": "https://picsum.photos/seed/mic/300/300", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
-    { "title": "Harry Potter", "category": "Story", "imageUrl": "https://covers.openlibrary.org/b/id/10522912-L.jpg", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" }
+    { "title": "Harry Potter", "category": "Story", "imageUrl": "https://covers.openlibrary.org/b/id/10522912-L.jpg", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" },
+    { "title": "On Purpose (Jay Shetty)", "category": "Podcast", "imageUrl": "https://covers.openlibrary.org/b/id/8259443-L.jpg", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+    { "title": "Midnight Horror", "category": "Story", "imageUrl": "https://picsum.photos/seed/horror/300/300", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" },
+    { "title": "Space Journey", "category": "Story", "imageUrl": "https://picsum.photos/seed/space/300/300", "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3" }
 ];
 
 // Default User
