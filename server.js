@@ -25,7 +25,7 @@ const libraryData = [
 
 // Default User
 let users = [
-    { name: "Admin", email: "admin@gmail.com", password: "123" }
+    { name: "Admin", email: "admin@gmail.com", password: "Admin1234" }
 ];
 
 // --- 🔌 API ROUTES ---
